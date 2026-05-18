@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TwoZ Technology — Software & Consultancy</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#0a0a0a;--white:#f8f7f4;--accent:#0d6efd;--accent2:#0a5cd1;
+  --accent-dim:#c9deff;--muted:#6b6b6b;--border:rgba(0,0,0,0.10);
+  --card:#fff;--radius:3px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:.85rem 5vw;background:rgba(248,247,244,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);transition:box-shadow .3s}
+nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,.08)}
+.logo-img{height:42px;width:auto}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-links a{font-size:.875rem;color:var(--muted);text-decoration:none;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:var(--accent);transition:width .25s}
+.nav-links a:hover{color:var(--black)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{background:var(--black)!important;color:#fff!important;padding:.45rem 1.2rem;border-radius:var(--radius);font-weight:500!important}
+.nav-cta::after{display:none!important}
+.nav-cta:hover{background:#222!important;color:#fff!important}
+.admin-btn{background:none;border:1px solid var(--border);padding:.4rem .9rem;border-radius:var(--radius);font-size:.8rem;cursor:pointer;color:var(--muted);font-family:'DM Sans',sans-serif;transition:all .2s;margin-left:.5rem}
+.admin-btn:hover{border-color:var(--accent);color:var(--accent)}
+.admin-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:7rem 5vw 4rem;gap:4rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-150px;right:-150px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,#c9deff44 0%,transparent 70%);pointer-events:none;animation:pulse 6s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.08);opacity:1}}
+.hero-tag{display:inline-block;font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-dim);padding:.35rem .85rem;border-radius:100px;margin-bottom:1.5rem;animation:fadeUp .7s .1s both}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.6rem,5vw,4.5rem);font-weight:800;line-height:1.05;letter-spacing:-.04em;margin-bottom:1.5rem;animation:fadeUp .7s .2s both}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero-desc{font-size:1.05rem;color:var(--muted);max-width:460px;margin-bottom:2.5rem;font-weight:300;line-height:1.8;animation:fadeUp .7s .3s both}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp .7s .4s both}
+.btn-primary{display:inline-flex;align-items:center;gap:.5rem;background:var(--black);color:#fff;padding:.875rem 2rem;border-radius:var(--radius);font-weight:500;font-size:.9375rem;text-decoration:none;transition:background .2s,transform .15s}
+.btn-primary:hover{background:#222;transform:translateY(-2px)}
+.btn-outline{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--black);padding:.875rem 2rem;border:1px solid rgba(0,0,0,.18);border-radius:var(--radius);font-weight:400;font-size:.9375rem;text-decoration:none;transition:border-color .2s,transform .15s}
+.btn-outline:hover{border-color:var(--black);transform:translateY(-2px)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+
+/* hero visual */
+.hero-visual{height:460px;display:flex;align-items:center;justify-content:center;animation:fadeUp .7s .5s both}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:12px;width:100%;height:100%}
+.hg-card{border:1px solid var(--border);border-radius:4px;padding:1.5rem;background:var(--card);display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;transition:transform .3s,box-shadow .3s}
+.hg-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.1)}
+.hg-card:nth-child(1){grid-column:1/2;grid-row:1/3;background:var(--black)}
+.hg-card:nth-child(3){background:#e8f1ff}
+.hg-icon{font-size:2rem;margin-bottom:auto;padding-bottom:1rem}
+.hg-title{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;margin-bottom:.25rem;color:var(--black)}
+.hg-card:nth-child(1) .hg-title{color:#fff}
+.hg-card:nth-child(3) .hg-title{color:#0d2a5e}
+.hg-sub{font-size:.8rem;color:var(--muted);font-weight:300}
+.hg-card:nth-child(1) .hg-sub{color:rgba(255,255,255,.55)}
+.hg-card:nth-child(3) .hg-sub{color:#3366aa}
+
+/* ── MARQUEE ── */
+.marquee-wrap{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:.9rem 0;background:var(--card)}
+.marquee-track{display:flex;gap:3rem;width:max-content;animation:marquee 22s linear infinite;align-items:center}
+.marquee-track span{font-family:'Syne',sans-serif;font-size:.8125rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.marquee-track span.dot{color:var(--accent);font-size:1rem}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── SECTIONS ── */
+section{padding:6rem 5vw}
+.section-tag{font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;max-width:640px;margin-bottom:1.25rem}
+.section-desc{font-size:1rem;color:var(--muted);max-width:520px;font-weight:300;line-height:1.8;margin-bottom:3rem}
+
+/* ── SERVICES ── */
+#services{background:var(--card)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.service-card{padding:2.5rem 2rem;border-right:1px solid var(--border);background:var(--white);transition:background .25s;position:relative}
+.service-card:last-child{border-right:none}
+.service-card:hover{background:var(--black)}
+.service-card:hover *{color:#fff!important}
+.service-num{font-family:'Syne',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.1em;color:var(--accent);margin-bottom:2rem;transition:color .25s}
+.service-icon{font-size:2.25rem;margin-bottom:1.25rem;line-height:1}
+.service-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.75rem;line-height:1.25}
+.service-desc{font-size:.875rem;color:var(--muted);font-weight:300;line-height:1.7}
+
+/* ── STATS ── */
+#stats{background:var(--black);color:#fff}
+.stats-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.stats-left .section-title{color:#fff}
+.stats-left .section-desc{color:rgba(255,255,255,.5)}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.stat-item{border-left:2px solid rgba(255,255,255,.12);padding-left:1.25rem}
+.stat-num{font-family:'Syne',sans-serif;font-size:2.75rem;font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:.35rem;color:#fff}
+.stat-num span{color:var(--accent)}
+.stat-label{font-size:.8125rem;color:rgba(255,255,255,.45);font-weight:300}
+
+/* ── WHY ── */
+#why{background:var(--white)}
+.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:1rem}
+.why-item{display:flex;gap:1.25rem;padding:1.75rem;border:1px solid var(--border);border-radius:4px;background:var(--card);transition:box-shadow .2s,transform .2s}
+.why-item:hover{box-shadow:0 6px 24px rgba(0,0,0,.07);transform:translateY(-2px)}
+.why-ico{font-size:1.5rem;flex-shrink:0;margin-top:.15rem}
+.why-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:.35rem}
+.why-desc{font-size:.85rem;color:var(--muted);font-weight:300;line-height:1.7}
+
+/* ── CONTACT ── */
+#contact{background:var(--card);text-align:center}
+.cta-box{max-width:680px;margin:0 auto;padding:4rem 3rem;background:var(--black);border-radius:6px;color:#fff;position:relative;overflow:hidden}
+.cta-box::before{content:'';position:absolute;top:-80px;right:-80px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,#1a56ff33 0%,transparent 70%);pointer-events:none}
+.cta-box .section-title{color:#fff;margin:0 auto 1rem}
+.cta-box p{color:rgba(255,255,255,.5);font-weight:300;margin-bottom:2rem;font-size:.9375rem}
+.cta-form{display:flex;flex-direction:column;gap:.75rem;max-width:460px;margin:0 auto 1.5rem;text-align:left}
+.cta-form input,.cta-form textarea{padding:.8rem 1.25rem;border:1px solid rgba(255,255,255,.18);border-radius:var(--radius);background:rgba(255,255,255,.07);color:#fff;font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;resize:vertical}
+.cta-form input::placeholder,.cta-form textarea::placeholder{color:rgba(255,255,255,.3)}
+.cta-form input:focus,.cta-form textarea:focus{border-color:var(--accent)}
+.cta-form button{padding:.85rem 1.75rem;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-weight:500;font-size:.9rem;cursor:pointer;transition:background .2s;align-self:flex-start}
+.cta-form button:hover{background:var(--accent2)}
+.form-status{font-size:.85rem;margin-top:.25rem;min-height:1.2rem;color:#4ade80}
+.cta-links{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap}
+.cta-links a{color:rgba(255,255,255,.35);font-size:.8125rem;text-decoration:none;transition:color .2s}
+.cta-links a:hover{color:rgba(255,255,255,.8)}
+
+/* ── FOOTER ── */
+footer{padding:2rem 5vw;border-top:1px solid var(--border);background:var(--white);display:flex;align-items:center;justify-content:space-between;font-size:.8125rem;color:var(--muted);font-weight:300}
+footer a{color:var(--muted);text-decoration:none;transition:color .2s}
+footer a:hover{color:var(--black)}
+.footer-links{display:flex;gap:2rem}
+
+/* ── SCROLL ANIMATIONS ── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity .65s ease,transform .65s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(32px);transition:opacity .65s ease,transform .65s ease}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+
+/* ── COUNTER ── */
+.counting{transition:all .1s}
+
+/* ── AI CHAT ── */
+.chat-bubble{position:fixed;bottom:2rem;right:2rem;z-index:500}
+.chat-toggle{width:58px;height:58px;border-radius:50%;background:var(--accent);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 4px 20px rgba(13,110,253,.4);transition:transform .2s,box-shadow .2s;position:relative}
+.chat-toggle:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(13,110,253,.5)}
+.chat-badge{position:absolute;top:-3px;right:-3px;width:14px;height:14px;border-radius:50%;background:#22c55e;border:2px solid #fff;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+.chat-panel{position:absolute;bottom:70px;right:0;width:360px;background:#fff;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.15);display:none;flex-direction:column;overflow:hidden;border:1px solid var(--border);max-height:520px}
+.chat-panel.open{display:flex}
+.chat-header{background:var(--black);color:#fff;padding:1rem 1.25rem;display:flex;align-items:center;gap:.75rem}
+.chat-avatar{width:36px;height:36px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.chat-header-info h4{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:.1rem}
+.chat-header-info p{font-size:.75rem;color:rgba(255,255,255,.5);font-weight:300}
+.chat-close{margin-left:auto;background:none;border:none;color:rgba(255,255,255,.6);cursor:pointer;font-size:1.2rem;line-height:1;padding:.2rem}
+.chat-close:hover{color:#fff}
+.chat-messages{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.75rem;min-height:200px;max-height:300px}
+.msg{max-width:82%;padding:.65rem .9rem;border-radius:10px;font-size:.875rem;line-height:1.5;animation:msgIn .25s ease}
+@keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.msg.bot{background:#f1f5f9;color:var(--black);align-self:flex-start;border-bottom-left-radius:2px}
+.msg.user{background:var(--accent);color:#fff;align-self:flex-end;border-bottom-right-radius:2px}
+.msg.typing{background:#f1f5f9;align-self:flex-start;padding:.75rem 1rem}
+.typing-dots span{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--muted);margin:0 2px;animation:dot 1.2s infinite}
+.typing-dots span:nth-child(2){animation-delay:.2s}
+.typing-dots span:nth-child(3){animation-delay:.4s}
+@keyframes dot{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
+.chat-input-area{padding:.75rem 1rem;border-top:1px solid var(--border);display:flex;gap:.5rem}
+.chat-input-area input{flex:1;border:1px solid var(--border);border-radius:var(--radius);padding:.6rem .85rem;font-family:'DM Sans',sans-serif;font-size:.875rem;outline:none}
+.chat-input-area input:focus{border-color:var(--accent)}
+.chat-send{background:var(--accent);color:#fff;border:none;border-radius:var(--radius);padding:.6rem .9rem;cursor:pointer;font-size:.95rem;transition:background .2s}
+.chat-send:hover{background:var(--accent2)}
+
+/* ── ADMIN PANEL ── */
+.admin-panel{position:fixed;top:0;right:-420px;width:400px;height:100vh;background:#fff;z-index:1000;box-shadow:-4px 0 30px rgba(0,0,0,.12);transition:right .35s ease;display:flex;flex-direction:column;overflow:hidden}
+.admin-panel.open{right:0}
+.admin-panel-header{background:var(--black);color:#fff;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.admin-panel-header h3{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem}
+.admin-close{background:none;border:none;color:rgba(255,255,255,.6);cursor:pointer;font-size:1.3rem;line-height:1}
+.admin-close:hover{color:#fff}
+.admin-body{flex:1;overflow-y:auto;padding:1.5rem}
+.admin-section{margin-bottom:1.75rem;padding-bottom:1.75rem;border-bottom:1px solid var(--border)}
+.admin-section:last-child{border-bottom:none;margin-bottom:0}
+.admin-section h4{font-family:'Syne',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.admin-field{margin-bottom:.85rem}
+.admin-field label{display:block;font-size:.8rem;font-weight:500;color:var(--black);margin-bottom:.3rem}
+.admin-field input,.admin-field textarea{width:100%;padding:.6rem .85rem;border:1px solid var(--border);border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:.875rem;outline:none;background:var(--white);transition:border-color .2s}
+.admin-field input:focus,.admin-field textarea:focus{border-color:var(--accent)}
+.admin-field textarea{resize:vertical;min-height:70px}
+.admin-save{width:100%;padding:.75rem;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-weight:500;font-size:.9rem;cursor:pointer;transition:background .2s;margin-top:.5rem}
+.admin-save:hover{background:var(--accent2)}
+.admin-toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(20px);background:#22c55e;color:#fff;padding:.65rem 1.5rem;border-radius:100px;font-size:.85rem;font-weight:500;opacity:0;transition:all .3s;pointer-events:none;z-index:2000}
+.admin-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.admin-overlay{position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:999;display:none}
+.admin-overlay.open{display:block}
+
+/* ── EDITABLE HIGHLIGHT ── */
+body.admin-mode [data-editable]{outline:2px dashed rgba(13,110,253,.4);outline-offset:2px;cursor:text;border-radius:2px;transition:outline .2s}
+body.admin-mode [data-editable]:hover{outline:2px solid var(--accent);background:rgba(13,110,253,.04)}
+body.admin-mode [data-editable]:focus{outline:2px solid var(--accent);background:rgba(13,110,253,.06)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:880px){
+  .hero{grid-template-columns:1fr;padding-top:6rem}
+  .hero-visual{height:300px}
+  .services-grid{grid-template-columns:1fr}
+  .service-card{border-right:none;border-bottom:1px solid var(--border)}
+  .service-card:last-child{border-bottom:none}
+  .stats-inner{grid-template-columns:1fr;gap:3rem}
+  .why-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .chat-panel{width:calc(100vw - 2rem);right:-100%}
+  .admin-panel{width:100vw}
+}
+</style>
+</head>
+<body>
+
+<!-- ADMIN OVERLAY -->
+<div class="admin-overlay" id="adminOverlay" onclick="closeAdmin()"></div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-panel" id="adminPanel">
+  <div class="admin-panel-header">
+    <h3>⚙️ Edit Content</h3>
+    <button class="admin-close" onclick="closeAdmin()">✕</button>
+  </div>
+  <div class="admin-body">
+    <div class="admin-section">
+      <h4>Hero Section</h4>
+      <div class="admin-field"><label>Tag line</label><input id="e-tag" value="Software · Consultancy · Innovation"/></div>
+      <div class="admin-field"><label>Heading</label><input id="e-h1" value="Building Smarter Digital Systems"/></div>
+      <div class="admin-field"><label>Description</label><textarea id="e-desc">TwoZ Technology delivers cutting-edge software development, health information system consultancy, and network & security solutions — built for organizations that cannot afford to stand still.</textarea></div>
+    </div>
+    <div class="admin-section">
+      <h4>Stats</h4>
+      <div class="admin-field"><label>Projects Delivered</label><input id="e-s1" value="50" type="number"/></div>
+      <div class="admin-field"><label>Health Facilities</label><input id="e-s2" value="30" type="number"/></div>
+      <div class="admin-field"><label>Satisfaction %</label><input id="e-s3" value="99" type="number"/></div>
+      <div class="admin-field"><label>Years of Expertise</label><input id="e-s4" value="5" type="number"/></div>
+    </div>
+    <div class="admin-section">
+      <h4>Contact Info</h4>
+      <div class="admin-field"><label>Email</label><input id="e-email" value="info@twoztech.com"/></div>
+      <div class="admin-field"><label>Phone</label><input id="e-phone" value="+251 911 627 472"/></div>
+    </div>
+    <button class="admin-save" onclick="applyAdmin()">✓ Apply Changes</button>
+  </div>
+</div>
+<div class="admin-toast" id="adminToast">✓ Changes saved!</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#"><img class="logo-img" alt="TwoZ Technology" src="LOGO_PLACEHOLDER"/></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#stats">About</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><button class="admin-btn" id="adminBtn" onclick="toggleAdmin()">✏️ Edit</button></li>
+    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag" id="hero-tag" data-editable contenteditable="false">Software · Consultancy · Innovation</div>
+    <h1 id="hero-h1"><span data-editable contenteditable="false">Building <em>Smarter</em> Digital Systems</span></h1>
+    <p class="hero-desc" id="hero-desc" data-editable contenteditable="false">TwoZ Technology delivers cutting-edge software development, health information system consultancy, and network &amp; security solutions — built for organizations that cannot afford to stand still.</p>
+    <div class="hero-actions">
+      <a href="#services" class="btn-primary">Explore Services →</a>
+      <a href="#contact" class="btn-outline">Talk to Us</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-grid">
+      <div class="hg-card">
+        <div class="hg-icon">⚕️</div>
+        <div class="hg-title">Health Information Systems</div>
+        <div class="hg-sub">EMR · HMIS · Data Interoperability</div>
+      </div>
+      <div class="hg-card">
+        <div class="hg-icon">💻</div>
+        <div class="hg-title">Software Development</div>
+        <div class="hg-sub">Web · Mobile · Enterprise</div>
+      </div>
+      <div class="hg-card">
+        <div class="hg-icon">🔒</div>
+        <div class="hg-title">Network &amp; Security</div>
+        <div class="hg-sub">Infrastructure · Audit · Config</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Software Development</span><span class="dot">·</span>
+    <span>Health Information Systems</span><span class="dot">·</span>
+    <span>Network Configuration</span><span class="dot">·</span>
+    <span>Security Audit</span><span class="dot">·</span>
+    <span>HMIS Consultancy</span><span class="dot">·</span>
+    <span>EMR Implementation</span><span class="dot">·</span>
+    <span>IT Infrastructure</span><span class="dot">·</span>
+    <span>Digital Transformation</span><span class="dot">·</span>
+    <span>Software Development</span><span class="dot">·</span>
+    <span>Health Information Systems</span><span class="dot">·</span>
+    <span>Network Configuration</span><span class="dot">·</span>
+    <span>Security Audit</span><span class="dot">·</span>
+    <span>HMIS Consultancy</span><span class="dot">·</span>
+    <span>EMR Implementation</span><span class="dot">·</span>
+    <span>IT Infrastructure</span><span class="dot">·</span>
+    <span>Digital Transformation</span><span class="dot">·</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-tag reveal">What We Do</div>
+  <h2 class="section-title reveal">Three pillars of expertise</h2>
+  <p class="section-desc reveal">From custom software to mission-critical health systems and network security, TwoZ covers the full spectrum of modern IT needs.</p>
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-icon">💻</div>
+      <div class="service-title">Software Development</div>
+      <p class="service-desc">Custom web and mobile applications built with modern frameworks. From MVPs to enterprise-grade platforms, we architect scalable, maintainable solutions aligned with your business goals.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-icon">⚕️</div>
+      <div class="service-title">Health Information System Consultancy</div>
+      <p class="service-desc">Deep expertise in HMIS, EMR/EHR implementation, and healthcare data interoperability. We help health institutions digitize, integrate, and optimize patient information workflows.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-icon">🔐</div>
+      <div class="service-title">Network &amp; Security Configuration</div>
+      <p class="service-desc">End-to-end network infrastructure design, configuration, and security hardening. We protect your digital assets with robust firewall policies, VPNs, and vulnerability assessments.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="stats-inner">
+    <div class="stats-left reveal-left">
+      <div class="section-tag">By the numbers</div>
+      <h2 class="section-title">Results that speak for themselves</h2>
+      <p class="section-desc">We measure our success by the outcomes we create for clients — faster systems, stronger security, and healthier data.</p>
+      <a href="#contact" class="btn-primary" style="color:#fff">Start a Project →</a>
+    </div>
+    <div class="stats-grid reveal-right">
+      <div class="stat-item">
+        <div class="stat-num" id="stat1">0<span>+</span></div>
+        <div class="stat-label" id="stat1-label">Projects delivered</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="stat2">0<span>+</span></div>
+        <div class="stat-label" id="stat2-label">Health facilities supported</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="stat3">0<span>%</span></div>
+        <div class="stat-label">Client satisfaction rate</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="stat4">0<span>+</span></div>
+        <div class="stat-label">Years of expertise</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="section-tag reveal">Why TwoZ</div>
+  <h2 class="section-title reveal">Built different, by design</h2>
+  <p class="section-desc reveal">We combine technical depth with sector-specific knowledge to deliver solutions that actually work in the real world.</p>
+  <div class="why-grid">
+    <div class="why-item reveal">
+      <div class="why-ico">🎯</div>
+      <div>
+        <div class="why-title">Domain expertise in healthcare IT</div>
+        <p class="why-desc">We understand the unique regulatory, interoperability, and workflow challenges of health information systems — not just the technology stack.</p>
+      </div>
+    </div>
+    <div class="why-item reveal">
+      <div class="why-ico">⚡</div>
+      <div>
+        <div class="why-title">Agile, transparent delivery</div>
+        <p class="why-desc">No black boxes. Our iterative approach keeps you in the loop at every phase, from discovery through deployment and beyond.</p>
+      </div>
+    </div>
+    <div class="why-item reveal">
+      <div class="why-ico">🛡️</div>
+      <div>
+        <div class="why-title">Security-first mindset</div>
+        <p class="why-desc">Every solution we build is designed with security at its core — from secure coding practices to network hardening and data protection.</p>
+      </div>
+    </div>
+    <div class="why-item reveal">
+      <div class="why-ico">🤝</div>
+      <div>
+        <div class="why-title">Long-term partnership</div>
+        <p class="why-desc">We don't disappear after launch. Our team provides ongoing support, training, and optimization to ensure lasting impact.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="cta-box reveal">
+    <div class="section-tag">Get Started</div>
+    <h2 class="section-title" style="font-size:clamp(1.75rem,3vw,2.4rem)">Ready to transform your digital infrastructure?</h2>
+    <p>Tell us about your project and we'll get back to you within 24 hours.</p>
+    <div class="cta-form">
+      <input type="text" id="cf-name" placeholder="Your name"/>
+      <input type="email" id="cf-email" placeholder="your@email.com"/>
+      <textarea id="cf-msg" rows="3" placeholder="Tell us about your project..."></textarea>
+      <button type="button" onclick="submitForm()">Send Message →</button>
+      <div class="form-status" id="form-status"></div>
+    </div>
+    <div class="cta-links">
+      <a href="#" id="link-email">info@twoztech.com</a>
+      <a href="#" id="link-phone">+251 911 627 472</a>
+      <a href="#">LinkedIn ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#"><img src="LOGO_PLACEHOLDER" alt="TwoZ Technology" style="height:34px;width:auto"/></a>
+  <span>© 2025 TwoZ Technology. All rights reserved.</span>
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<!-- AI CHAT -->
+<div class="chat-bubble">
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-header">
+      <div class="chat-avatar">🤖</div>
+      <div class="chat-header-info">
+        <h4>TwoZ Assistant</h4>
+        <p>Powered by AI · Online</p>
+      </div>
+      <button class="chat-close" onclick="toggleChat()">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="msg bot">👋 Hi! I'm the TwoZ Technology assistant. Ask me anything about our services, health information systems, software development, or network security!</div>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="chatInput" placeholder="Ask something..." onkeydown="if(event.key==='Enter')sendChat()"/>
+      <button class="chat-send" onclick="sendChat()">➤</button>
+    </div>
+  </div>
+  <button class="chat-toggle" onclick="toggleChat()" title="Chat with us">
+    💬
+    <span class="chat-badge"></span>
+  </button>
+</div>
+
+<script>
+// ── LOGO (base64 injected by script) ──
+const LOGO_B64 = '/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAGQAZADASIAAhEBAxEB/8QAHQABAAICAwEBAAAAAAAAAAAAAAUGBwgCAwQBCf/EAEoQAAEEAgECAgYGBQcKBwEBAAEAAgMEBREGEiEHMQgTQVFhcRQiMoGRsSNCdKGyFTM3UmJywRcYJDU2c5OU0eEWNENUVYKSU1b/xAAcAQEAAgIDAQAAAAAAAAAAAAAAAQMCBAUGBwj/xAA7EQACAQIEAwUFBwMDBQAAAAAAAQIDEQQFEiEGMUEHE1FhcSIyQpHRFCMzgaGxwVJy4RUkYjSCkvDx/9oADAMBAAIRAxEAPwDXdERc0cIEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEXZFDLIQGMc7fuCmKXHbUzQ+XTGn491jKajzOVy3JMfmc9OFpOX5bfMg19AJ8gSrhX43VZoyOL/gQpCLE4+MfVrR79+lU8RFcjvOC7K82rK9aUYeru/0KCIpD5Rv/AAT1Uv8A/N//AOSsitqVm+ULQhq1yNGJqw+0eRzC7Iatt8SvkY4LXDzaR9y+LIcmMoyfarRn7l4bPHqUn2B6v5BZLER6nGYzsozOkr0akZ/NP9dilIrFc41M0EwO6vmQFCWKliBxbJG4a9uuytjOMuR0fNOHMzyt/wC6pNLx6fM6ERFmcIEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBEXdUrS2ZRHG0klQ3YspUp1pqnTV2+SR1sY57g1rSSfcFO4rj0k3TJYPQ3z0pjDYaGoxr5AHS6779ilyQBsrVqV+kT23hbszpwisTmm75qH1+h56lKtWaBFE1uvaF6CQPNR2Ry9Wo0gv6newDuq1ez9udx9WfVt/slVxpynuduzXjHJeH49xCza+GFtvXoi4T268I3JK0fDY2o+bP0WHQc4//VUqWWSV3VI8uPvK4K9YddTznH9rOOqSawtKMV57v+C4O5LVHk0/gUbyaqfNp/Aqnr1UaNi28NiYde8qXRguZx2H7ROIsTVVOjaTfRRLZHyGk7zLh/8AVe6vkKs4+pK37zpUK9XdVtSQOOyw6XS1zmnbToqHQi1schR7Uc1wlZ0sXSjLS7Ncndc/EyaCD3BB+S654Ip29MrA4fFUenmrtcj9IXgewlWPF5+Cy0Nm/RyfuVMqUo7nf8n4+yfOfuKvsSfSXJ/nyPJleOtcTJVOv7PkFWrEEteQslYQQskMc1zQ5pBB9oXjyWNr3mESNAfrs7XdZQrNbSOJ4m7NsLjYvEZd7E+dvhfp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itEz1NWm76cNf+r3Lfn2CxvlJYZ8hNLXjEUTnbaweQClSuQ42PMiIsjEIiIAiIgCIiAluL5/Icdvy3cdK6OaSCSBzgdfUeNOH4LyQZK5D6kNnf0Qva9jfYC07C8iKLIXZZa3NczFnrOXdM6SW0SZml3Z5I13+5deZ5ZkclaqTO1E2mwsgY12wxu96CryKNKJ1MnLnKMrbrT17Fh8kc0zZXAnycPJdLeQZAW2WRK71jInRA7/AFXeaiUU2QuySGYtmg6g6RwgfI2Rw37R5LJfHfE9mFwDa7creuyio+s2vLHqOMPBB0R81iJFDgnzJjNrkci9xk9Zv6297U/e5ZkLuHq46wA8VS0xyF31ho7VeRS0mQm0WKrzHM1ss7JxWHiw6vJXLurv0PGnBeKLPX48E/DNlcKr5WSlu+3U3yUUijShqZNxcmycdyO02ZwkjhdC07/Vd5hT/h9yyHCCd1nK3a3XIJPVwx9TXkD2qiojimSpNFs5By597l1jNiIT+scTp+xvelEciztvNzROsfVjhaWxRg7DBvegopEUUiHJsn+N8pvYSpLUiY2WCV4e6NztDqA7FcM9yrM5m1Vnt25CKn/lm72Ihveh96g0TSr3Gp2sWXN8xyGZomC+xs05ILrDnEvcfiuqvyq/HhRipGiaFremMud9ge4KvomlDUyxnl+TkwEOGsH18FdgZB1u/mm+4LlU5jkY8Q3GWGNtRRs6IvWOP6NvuCrSJpQ1Mko81djwNnCtkIqWJmzSM32Lm+SjURTYgscHNM/BSp0470rYafT6pod2GjsLyZLkeTyHILGctTvfbncXPeT37qHRRpROpk9iOU5DHTWHD9LHYPVJG52gTrW153Z656q1DGfVxWZBI9jT22BpRKKbIXZ7L+Ss3a9WCd5cyrH6uME+Q3te/j/I7mIqzVGNE1aY9T4nHTS7WgfuUIiWQuyw4bluRxclkQaNey/rkgLtNLtaBXlbn7kWbOVqf6NKd9mHto+YUQijShqZO5bk1m/djt+oZDKzzcxx7nfmul/Ici+K3GZXFtuUSy9/NwGlEIpshdkv/wCIcj11X+tdutC6GPv5NPmF6MByzK4exNJXmc6OZ3VJGXaDna0CoBEshdk3lOUZfIZeHIzWpPWQH9CN9oxvegu+Dl+Wh5BNmmSkWJ+r1v1vt7Gjv7lXUUaUNTJ7L8mvZa9VlsyuihrECJjDsRje+yueb8QoZuLPxcWTuXZJnNLzPH06WLkUOCZKm0XfF8qqYTh1jFYuxO6a45r52uZ0tBAI7H29lSERZJWIbuERFJAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQH//2Q==';
+document.querySelectorAll('img[src="LOGO_PLACEHOLDER"]').forEach(img => {
+  img.src = 'data:image/jpeg;base64,' + LOGO_B64;
+});
+
+// ── NAV SCROLL EFFECT ──
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// ── SCROLL REVEAL ──
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => revealObs.observe(el));
+
+// ── ANIMATED COUNTERS ──
+const statTargets = { stat1: 50, stat2: 30, stat3: 99, stat4: 5 };
+let countersStarted = false;
+const counterObs = new IntersectionObserver((entries) => {
+  if(entries[0].isIntersecting && !countersStarted) {
+    countersStarted = true;
+    Object.entries(statTargets).forEach(([id, target]) => {
+      let current = 0;
+      const el = document.getElementById(id);
+      const suffix = el.querySelector('span').textContent;
+      const step = Math.ceil(target / 60);
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.childNodes[0].nodeValue = current;
+        if(current >= target) clearInterval(timer);
+      }, 25);
+    });
+  }
+}, { threshold: 0.4 });
+const statsSection = document.getElementById('stats');
+if(statsSection) counterObs.observe(statsSection);
+
+// ── CONTACT FORM ──
+function submitForm() {
+  const name = document.getElementById('cf-name').value.trim();
+  const email = document.getElementById('cf-email').value.trim();
+  const msg = document.getElementById('cf-msg').value.trim();
+  const status = document.getElementById('form-status');
+  if(!name || !email || !msg) { status.style.color='#f87171'; status.textContent='Please fill in all fields.'; return; }
+  status.style.color='#94a3b8'; status.textContent='Sending...';
+  setTimeout(() => {
+    status.style.color='#4ade80';
+    status.textContent='✓ Message sent! We\'ll be in touch within 24 hours.';
+    document.getElementById('cf-name').value='';
+    document.getElementById('cf-email').value='';
+    document.getElementById('cf-msg').value='';
+  }, 1200);
+}
+
+// ── AI CHAT ──
+let chatOpen = false;
+function toggleChat() {
+  chatOpen = !chatOpen;
+  document.getElementById('chatPanel').classList.toggle('open', chatOpen);
+}
+
+async function sendChat() {
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if(!msg) return;
+  input.value = '';
+  appendMsg(msg, 'user');
+  const typing = appendTyping();
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: `You are TwoZ Technology's friendly and knowledgeable AI assistant embedded on the company website. TwoZ Technology is an Ethiopian tech company specializing in:
+1. Software Development (custom web & mobile apps, enterprise solutions)
+2. Health Information System Consultancy (HMIS, EMR/EHR implementation, healthcare data interoperability)
+3. Network & Security Configuration (infrastructure design, firewall policies, VPNs, vulnerability assessments)
+
+Their tagline is "Making things Better with technology". Contact: info@twoztech.com, +251 911 627 472.
+
+Be helpful, concise, and professional. Answer questions about TwoZ's services, tech topics related to their work, and guide visitors toward getting in touch for specific project needs. Keep responses under 3 paragraphs.`,
+        messages: [{ role: 'user', content: msg }]
+      })
+    });
+    const data = await res.json();
+    typing.remove();
+    const reply = data.content?.map(b => b.text || '').join('') || 'Sorry, I couldn\'t get a response. Please contact us directly at info@twoztech.com';
+    appendMsg(reply, 'bot');
+  } catch(e) {
+    typing.remove();
+    appendMsg('Sorry, something went wrong. Please reach out to us at info@twoztech.com or +251 911 627 472.', 'bot');
+  }
+}
+
+function appendMsg(text, type) {
+  const box = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = `msg ${type}`;
+  div.textContent = text;
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+  return div;
+}
+
+function appendTyping() {
+  const box = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'msg typing';
+  div.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+  return div;
+}
+
+// ── ADMIN MODE ──
+let adminOpen = false;
+function toggleAdmin() {
+  adminOpen ? closeAdmin() : openAdmin();
+}
+function openAdmin() {
+  adminOpen = true;
+  document.getElementById('adminPanel').classList.add('open');
+  document.getElementById('adminOverlay').classList.add('open');
+  document.getElementById('adminBtn').classList.add('active');
+  document.body.classList.add('admin-mode');
+  // populate fields from current content
+  document.getElementById('e-tag').value = document.getElementById('hero-tag').textContent;
+  document.getElementById('e-h1').value = document.getElementById('hero-h1').textContent.trim();
+  document.getElementById('e-desc').value = document.getElementById('hero-desc').textContent.trim();
+  document.getElementById('e-email').value = document.getElementById('link-email').textContent;
+  document.getElementById('e-phone').value = document.getElementById('link-phone').textContent;
+}
+function closeAdmin() {
+  adminOpen = false;
+  document.getElementById('adminPanel').classList.remove('open');
+  document.getElementById('adminOverlay').classList.remove('open');
+  document.getElementById('adminBtn').classList.remove('active');
+  document.body.classList.remove('admin-mode');
+}
+
+function applyAdmin() {
+  // Hero
+  document.getElementById('hero-tag').textContent = document.getElementById('e-tag').value;
+  const h1 = document.getElementById('hero-h1').querySelector('span');
+  const words = document.getElementById('e-h1').value.split(' ');
+  // Bold first word in accent
+  h1.innerHTML = `<em>${words[0]}</em> ${words.slice(1).join(' ')}`;
+  document.getElementById('hero-desc').textContent = document.getElementById('e-desc').value;
+  // Stats targets
+  statTargets.stat1 = parseInt(document.getElementById('e-s1').value) || 50;
+  statTargets.stat2 = parseInt(document.getElementById('e-s2').value) || 30;
+  statTargets.stat3 = parseInt(document.getElementById('e-s3').value) || 99;
+  statTargets.stat4 = parseInt(document.getElementById('e-s4').value) || 5;
+  // Update displayed stat numbers
+  const suffixes = {stat1:'+', stat2:'+', stat3:'%', stat4:'+'};
+  Object.entries(statTargets).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    el.innerHTML = `${val}<span>${suffixes[id]}</span>`;
+  });
+  // Contact
+  const email = document.getElementById('e-email').value;
+  const phone = document.getElementById('e-phone').value;
+  document.getElementById('link-email').textContent = email;
+  document.getElementById('link-email').href = `mailto:${email}`;
+  document.getElementById('link-phone').textContent = phone;
+  document.getElementById('link-phone').href = `tel:${phone.replace(/\s/g,'')}`;
+  // Save to localStorage
+  localStorage.setItem('twozContent', JSON.stringify({
+    tag: document.getElementById('e-tag').value,
+    h1: document.getElementById('e-h1').value,
+    desc: document.getElementById('e-desc').value,
+    s1: statTargets.stat1, s2: statTargets.stat2, s3: statTargets.stat3, s4: statTargets.stat4,
+    email, phone
+  }));
+  // Toast
+  const toast = document.getElementById('adminToast');
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+  closeAdmin();
+}
+
+// ── RESTORE SAVED CONTENT ──
+const saved = localStorage.getItem('twozContent');
+if(saved) {
+  try {
+    const d = JSON.parse(saved);
+    if(d.tag) document.getElementById('hero-tag').textContent = d.tag;
+    if(d.h1) {
+      const words = d.h1.split(' ');
+      document.getElementById('hero-h1').querySelector('span').innerHTML = `<em>${words[0]}</em> ${words.slice(1).join(' ')}`;
+    }
+    if(d.desc) document.getElementById('hero-desc').textContent = d.desc;
+    if(d.s1) { statTargets.stat1=d.s1; document.getElementById('stat1').innerHTML=`${d.s1}<span>+</span>`; }
+    if(d.s2) { statTargets.stat2=d.s2; document.getElementById('stat2').innerHTML=`${d.s2}<span>+</span>`; }
+    if(d.s3) { statTargets.stat3=d.s3; document.getElementById('stat3').innerHTML=`${d.s3}<span>%</span>`; }
+    if(d.s4) { statTargets.stat4=d.s4; document.getElementById('stat4').innerHTML=`${d.s4}<span>+</span>`; }
+    if(d.email) { document.getElementById('link-email').textContent=d.email; document.getElementById('link-email').href=`mailto:${d.email}`; }
+    if(d.phone) { document.getElementById('link-phone').textContent=d.phone; }
+  } catch(e) {}
+}
+</script>
+</body>
+</html>
